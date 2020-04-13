@@ -21,6 +21,7 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   padding: 25px 0px;
+  z-index: 2;
 `;
 
 const HeaderWrapper = styled.div`
@@ -73,25 +74,13 @@ const ME = gql`
 
 export default withRouter(({ history }) => {
   const search = useInput("");
-  const { data, loading } = useQuery(ME);
-
-  /* 
-  // Todo: Use optional chaining  
-  if (loading) {
-    // prevent: `TypeError: Cannot read property 'me' of undefined`
-    return (
-      <Header>
-        <HeaderWrapper>{"LOADING..."}</HeaderWrapper>
-      </Header>
-    );
-  } */
-
-  console.log("Header.data", data);
+  const { data } = useQuery(ME);
 
   const onSearchSubmit = (e) => {
     e.preventDefault();
     history.push(`/search?term=${search.value}`);
   };
+
   return (
     <Header>
       <HeaderWrapper>
